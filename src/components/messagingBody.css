@@ -1,24 +1,27 @@
 .messagingBody {
-  width: 390px;
-  height: 740px;
-  overflow-y: auto;
+    width: 390px;
 
-  /* ❌ ELIMINADO */
-  margin: 0;
+    /* 🔥 CLAVES */
+    margin: 0;
+    flex-shrink: 0;
 
-  padding: 0;
-  background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: repeat;
-  background-attachment: scroll;
+    height: 740px;            /* podés cambiar sin romper */
+    overflow-y: auto;
 
-  border-radius: 0;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: 0;
+    background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    background-attachment: scroll;
 
-  display: block;
+    border-radius: 0;
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    display: block;
 }
+
 
 
 .conversationEntriesListView {
