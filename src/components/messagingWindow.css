@@ -3,21 +3,20 @@
     height: 920px;
     border-radius: 20px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    background-color: transparent;
     background-image: url('./IphoneFrame.png');
     background-size: cover;
     background-position: center;
-    z-index: 1000;
 
     padding: 0 2px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* pegados vertical */
-    align-items: center;         /* centrados en X */
-
     overflow: hidden;
+
+    /* 🔥 GRID, no flex */
+    display: grid;
+    grid-template-rows: auto auto auto;
+    justify-items: center;
+    align-content: center; /* 👈 CENTRA TODO EL BLOQUE */
 }
+
 
 
 
