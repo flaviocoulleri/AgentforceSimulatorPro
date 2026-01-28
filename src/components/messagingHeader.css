@@ -1,11 +1,7 @@
 .messagingHeader {
     width: 390px;
-    height: auto;
     background: linear-gradient(180deg, #f5f1e8 0%, #f0ede8 100%);
     border-radius: 15px 15px 0 0;
-    font-family:
-      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-
     padding: 12px 0;
     border-bottom: 1px solid #e5e5ea;
 
@@ -14,7 +10,6 @@
     gap: 12px;
 
     margin: 0;
-    flex-shrink: 0;
 }
 
 
