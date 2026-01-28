@@ -188,7 +188,7 @@ export function processMarkdownFormatting(text) {
   // Process headings: # Title -> <h3>Title</h3>
   // This handles lines that start with # (one or more)
   html = html.replace(/^#+\s+(.+)$/gm, (match, title) => {
-    return `<h3 style="margin: 8px 0 4px 0; font-size: 1.1em; font-weight: 600;">${title}</h3>`;
+    return `<h3 style="margin: 8px 0 4px 0; font-size: 1.1em; font-weight: 600; color: #000;">${title}</h3>`;
   });
 
   // Process bold text: **text** -> <strong>text</strong>
