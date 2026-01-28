@@ -46,7 +46,7 @@
 
 .textMessageContent {
   white-space: pre-line;
-  color: #000;
+  color: #000 !important;
   margin: 0px;
   font-size: 15px;
   font-weight: 400;
@@ -55,16 +55,17 @@
 }
 
 .textMessageBubble[class~="incoming"] .textMessageContent {
-  color: #000;
+  color: #000 !important;
 }
 
 .textMessageContent h3 {
   margin: 8px 0 0 0;
   font-size: 1.1em;
   font-weight: 600;
-  color: #111b21;
+  color: #000 !important;
 }
 
 .textMessageContent strong {
   font-weight: 600;
+  color: #000 !important;
 }
