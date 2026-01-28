@@ -30,3 +30,6 @@
 .messagingWindow > * {
   outline: 1px dashed blue;
 }
+.messagingWindow > * {
+    margin: 0;
+}
