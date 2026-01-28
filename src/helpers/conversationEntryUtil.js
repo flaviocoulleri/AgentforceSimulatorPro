@@ -7,18 +7,18 @@ import { CONVERSATION_CONSTANTS } from "./constants";
  * @throws {Error} if event data is invalid.
  */
 export function parseServerSentEventData(event) {
-    if (event && event.data && typeof event.data === "string") {
-        const data = JSON.parse(event.data);
+  if (event && event.data && typeof event.data === "string") {
+    const data = JSON.parse(event.data);
 
-        if (!data || typeof data !== "object") {
-            throw new Error(`Error parsing data in server sent event.`);
-        } else {
-            return data;
-        }
+    if (!data || typeof data !== "object") {
+      throw new Error(`Error parsing data in server sent event.`);
     } else {
-        throw new Error(`Invalid data in server sent event.`);
+      return data;
     }
-};
+  } else {
+    throw new Error(`Invalid data in server sent event.`);
+  }
+}
 
 /**
  * Get the sender's display name from incoming typing started/stopped indicator events.
@@ -26,8 +26,13 @@ export function parseServerSentEventData(event) {
  * @returns {String} - Parsed display name of sender.
  */
 export function getSenderDisplayName(data) {
-    return (data && data.conversationEntry && data.conversationEntry.senderDisplayName) || "";
-};
+  return (
+    (data &&
+      data.conversationEntry &&
+      data.conversationEntry.senderDisplayName) ||
+    ""
+  );
+}
 
 /**
  * Get the sender's role from incoming typing started/stopped indicator events.
@@ -35,8 +40,14 @@ export function getSenderDisplayName(data) {
  * @returns {String} - Parsed role of the sender.
  */
 export function getSenderRole(data) {
-    return (data && data.conversationEntry && data.conversationEntry.sender && data.conversationEntry.sender.role) || "";
-};
+  return (
+    (data &&
+      data.conversationEntry &&
+      data.conversationEntry.sender &&
+      data.conversationEntry.sender.role) ||
+    ""
+  );
+}
 
 /**
  * Parses JSON entry payload field from a server-sent event data.
@@ -45,37 +56,51 @@ export function getSenderRole(data) {
  * @throws {Error} if event data is invalid.
  */
 export function createConversationEntry(data) {
-    try {
-        if (typeof data === "object") {
-            const entryPayload = JSON.parse(data.conversationEntry.entryPayload);
+  try {
+    if (typeof data === "object") {
+      const entryPayload = JSON.parse(data.conversationEntry.entryPayload);
 
-            // Do not create a conversation-entry for unknown/unsupported entryType.
-            if (!Object.values(CONVERSATION_CONSTANTS.EntryTypes).includes(entryPayload.entryType)) {
-                console.warn(`Unexpected and/or unsupported entryType: ${entryPayload.entryType}`);
-                return;
-            }
+      // Do not create a conversation-entry for unknown/unsupported entryType.
+      if (
+        !Object.values(CONVERSATION_CONSTANTS.EntryTypes).includes(
+          entryPayload.entryType,
+        )
+      ) {
+        console.warn(
+          `Unexpected and/or unsupported entryType: ${entryPayload.entryType}`,
+        );
+        return;
+      }
 
-    
-            return {
-                conversationId: data.conversationId,
-                messageId: data.conversationEntry.identifier,
-                content: entryPayload.abstractMessage || entryPayload,
-                messageType: entryPayload.abstractMessage ? entryPayload.abstractMessage.messageType : (entryPayload.routingType || entryPayload.entries[0].operation) ,
-                entryType: entryPayload.entryType,
-                sender: data.conversationEntry.sender,
-                actorName: data.conversationEntry.senderDisplayName ? (data.conversationEntry.senderDisplayName || data.conversationEntry.sender.role) : (entryPayload.entries[0].displayName || entryPayload.entries[0].participant.role),
-                actorType: data.conversationEntry.sender.role,
-                transcriptedTimestamp: data.conversationEntry.transcriptedTimestamp,
-                messageReason: entryPayload.messageReason
-            };
-        } else {
-            throw new Error(`Expected an object to create a new conversation entry but instead, received ${data}`);
-        }
-    } catch (err) {
-        throw new Error(`Something went wrong while creating a conversation entry: ${err}`);
+      return {
+        conversationId: data.conversationId,
+        messageId: data.conversationEntry.identifier,
+        content: entryPayload.abstractMessage || entryPayload,
+        messageType: entryPayload.abstractMessage
+          ? entryPayload.abstractMessage.messageType
+          : entryPayload.routingType || entryPayload.entries[0].operation,
+        entryType: entryPayload.entryType,
+        sender: data.conversationEntry.sender,
+        actorName: data.conversationEntry.senderDisplayName
+          ? data.conversationEntry.senderDisplayName ||
+            data.conversationEntry.sender.role
+          : entryPayload.entries[0].displayName ||
+            entryPayload.entries[0].participant.role,
+        actorType: data.conversationEntry.sender.role,
+        transcriptedTimestamp: data.conversationEntry.transcriptedTimestamp,
+        messageReason: entryPayload.messageReason,
+      };
+    } else {
+      throw new Error(
+        `Expected an object to create a new conversation entry but instead, received ${data}`,
+      );
     }
-    
-};
+  } catch (err) {
+    throw new Error(
+      `Something went wrong while creating a conversation entry: ${err}`,
+    );
+  }
+}
 
 //============================================================== STATIC TEXT MESSAGE functions ==============================================================
 /**
@@ -84,11 +109,14 @@ export function createConversationEntry(data) {
  * @returns {boolean} - TRUE - if the conversation-entry is a CONVERSATION_MESSAGE and FALSE - otherwise.
  */
 export function isConversationEntryMessage(conversationEntry) {
-    if (conversationEntry) {
-        return conversationEntry.entryType === CONVERSATION_CONSTANTS.EntryTypes.CONVERSATION_MESSAGE;
-    }
-    return false;
-};
+  if (conversationEntry) {
+    return (
+      conversationEntry.entryType ===
+      CONVERSATION_CONSTANTS.EntryTypes.CONVERSATION_MESSAGE
+    );
+  }
+  return false;
+}
 
 /**
  * Validates whether the supplied CONVERSATION_MESSAGE is originating from an end-user participant.
@@ -96,11 +124,14 @@ export function isConversationEntryMessage(conversationEntry) {
  * @returns {boolean} - TRUE - if the CONVERSATION_MESSAGE is sent by the end-user participant and FALSE - otherwise.
  */
 export function isMessageFromEndUser(conversationEntry) {
-    if (isConversationEntryMessage(conversationEntry)) {
-        return conversationEntry.actorType === CONVERSATION_CONSTANTS.ParticipantRoles.ENDUSER;
-    }
-    return false;
-};
+  if (isConversationEntryMessage(conversationEntry)) {
+    return (
+      conversationEntry.actorType ===
+      CONVERSATION_CONSTANTS.ParticipantRoles.ENDUSER
+    );
+  }
+  return false;
+}
 
 /**
  * Validates whether the supplied CONVERSATION_MESSAGE is a STATIC_CONTENT_MESSAGE (i.e. messageType === "STATIC_CONTENT_MESSAGE").
@@ -108,11 +139,15 @@ export function isMessageFromEndUser(conversationEntry) {
  * @returns {boolean} - TRUE - if the CONVERSATION_MESSAGE is a STATIC_CONTENT_MESSAGE and FALSE - otherwise.
  */
 export function isConversationEntryStaticContentMessage(conversationEntry) {
-    if (isConversationEntryMessage(conversationEntry)) {
-        return conversationEntry.content && conversationEntry.content.messageType === CONVERSATION_CONSTANTS.MessageTypes.STATIC_CONTENT_MESSAGE;
-    }
-    return false;
-};
+  if (isConversationEntryMessage(conversationEntry)) {
+    return (
+      conversationEntry.content &&
+      conversationEntry.content.messageType ===
+        CONVERSATION_CONSTANTS.MessageTypes.STATIC_CONTENT_MESSAGE
+    );
+  }
+  return false;
+}
 
 /**
  * Gets the supplied STATIC_CONTENT_MESSAGE's payload.
@@ -120,11 +155,11 @@ export function isConversationEntryStaticContentMessage(conversationEntry) {
  * @returns {object|undefined}
  */
 export function getStaticContentPayload(conversationEntry) {
-    if (isConversationEntryStaticContentMessage(conversationEntry)) {
-        return conversationEntry.content && conversationEntry.content.staticContent;
-    }
-    return undefined;
-};
+  if (isConversationEntryStaticContentMessage(conversationEntry)) {
+    return conversationEntry.content && conversationEntry.content.staticContent;
+  }
+  return undefined;
+}
 
 /**
  * Validates whether the supplied STATIC_CONTENT_MESSAGE is a Text Message (i.e. formatType === "Text").
@@ -132,10 +167,37 @@ export function getStaticContentPayload(conversationEntry) {
  * @returns {boolean} - TRUE - if the STATIC_CONTENT_MESSAGE is a Text Message and FALSE - otherwise.
  */
 export function isTextMessage(conversationEntry) {
-    if (isConversationEntryStaticContentMessage(conversationEntry)) {
-        return getStaticContentPayload(conversationEntry).formatType === CONVERSATION_CONSTANTS.FormatTypes.TEXT;
-    }
-};
+  if (isConversationEntryStaticContentMessage(conversationEntry)) {
+    return (
+      getStaticContentPayload(conversationEntry).formatType ===
+      CONVERSATION_CONSTANTS.FormatTypes.TEXT
+    );
+  }
+}
+
+/**
+ * Processes markdown formatting in text: converts **text** to bold and # titles to larger headings.
+ * @param {string} text - The text to process
+ * @returns {string} - HTML string with processed formatting
+ */
+export function processMarkdownFormatting(text) {
+  if (!text) return "";
+
+  let html = text;
+
+  // Process headings: # Title -> <h3>Title</h3>
+  // This handles lines that start with # (one or more)
+  html = html.replace(/^#+\s+(.+)$/gm, (match, title) => {
+    return `<h3 style="margin: 8px 0 4px 0; font-size: 1.1em; font-weight: 600;">${title}</h3>`;
+  });
+
+  // Process bold text: **text** -> <strong>text</strong>
+  // Also handles single asterisks around text *text*
+  html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  html = html.replace(/\*(.+?)\*/g, "<strong>$1</strong>");
+
+  return html;
+}
 
 /**
  * Gets the supplied Text Message's text.
@@ -143,11 +205,12 @@ export function isTextMessage(conversationEntry) {
  * @returns {string}
  */
 export function getTextMessageContent(conversationEntry) {
-    if (isTextMessage(conversationEntry)) {
-        return getStaticContentPayload(conversationEntry).text;
-    }
-    return "";
-};
+  if (isTextMessage(conversationEntry)) {
+    const rawText = getStaticContentPayload(conversationEntry).text;
+    return processMarkdownFormatting(rawText);
+  }
+  return "";
+}
 
 //============================================================== CHOICES MESSAGE functions ==============================================================
 /**
@@ -156,11 +219,15 @@ export function getTextMessageContent(conversationEntry) {
  * @returns {boolean} - TRUE - if the CONVERSATION_MESSAGE is a CHOICES_MESSAGE and FALSE - otherwise.
  */
 export function isConversationEntryChoicesMessage(conversationEntry) {
-    if (isConversationEntryMessage(conversationEntry)) {
-        return conversationEntry.content && conversationEntry.content.messageType === CONVERSATION_CONSTANTS.MessageTypes.CHOICES_MESSAGE;
-    }
-    return false;
-};
+  if (isConversationEntryMessage(conversationEntry)) {
+    return (
+      conversationEntry.content &&
+      conversationEntry.content.messageType ===
+        CONVERSATION_CONSTANTS.MessageTypes.CHOICES_MESSAGE
+    );
+  }
+  return false;
+}
 
 /**
  * Validates whether the supplied CHOICES_MESSAGE is QUICK_REPLIES (i.e. formatType === "QuickReplies") or BUTTONS (i.e. formatType === "Buttons").
@@ -168,12 +235,16 @@ export function isConversationEntryChoicesMessage(conversationEntry) {
  * @returns {boolean} - TRUE - if the CHOICES_MESSAGE is a QUICK_REPLIES or BUTTONS format type and FALSE - otherwise.
  */
 export function isChoicesMessage(conversationEntry) {
-    if (isConversationEntryChoicesMessage(conversationEntry)) {
-        return getStaticContentPayload(conversationEntry).formatType === CONVERSATION_CONSTANTS.FormatTypes.QUICK_REPLIES 
-            || getStaticContentPayload(conversationEntry).formatType === CONVERSATION_CONSTANTS.FormatTypes.BUTTONS;
-    }
-    return false;
-};
+  if (isConversationEntryChoicesMessage(conversationEntry)) {
+    return (
+      getStaticContentPayload(conversationEntry).formatType ===
+        CONVERSATION_CONSTANTS.FormatTypes.QUICK_REPLIES ||
+      getStaticContentPayload(conversationEntry).formatType ===
+        CONVERSATION_CONSTANTS.FormatTypes.BUTTONS
+    );
+  }
+  return false;
+}
 
 //============================================================== PARTICIPANT CHANGE functions ==============================================================
 /**
@@ -182,17 +253,24 @@ export function isChoicesMessage(conversationEntry) {
  * @returns {boolean} - TRUE - if the conversation-entry is a PARTICIPANT_CHANGED event and FALSE - otherwise.
  */
 export function isParticipantChangeEvent(conversationEntry) {
-    return conversationEntry.entryType === CONVERSATION_CONSTANTS.EntryTypes.PARTICIPANT_CHANGED;
-};
+  return (
+    conversationEntry.entryType ===
+    CONVERSATION_CONSTANTS.EntryTypes.PARTICIPANT_CHANGED
+  );
+}
 
 /**
- * Validates whether the supplied PARTICIPANT_CHANGED conversation-entry's participant joined the conversation. 
+ * Validates whether the supplied PARTICIPANT_CHANGED conversation-entry's participant joined the conversation.
  * @param {object} conversationEntry
  * @returns {boolean} - TRUE - if the participant joined and FALSE - if the participant left.
  */
 export function hasParticipantJoined(conversationEntry) {
-    return isParticipantChangeEvent(conversationEntry) && conversationEntry.content.entries[0].operation === CONVERSATION_CONSTANTS.ParticipantChangedOperations.ADD;
-};
+  return (
+    isParticipantChangeEvent(conversationEntry) &&
+    conversationEntry.content.entries[0].operation ===
+      CONVERSATION_CONSTANTS.ParticipantChangedOperations.ADD
+  );
+}
 
 /**
  * Gets the supplied PARTICIPANT_CHANGED conversation-entry's participant name.
@@ -200,5 +278,9 @@ export function hasParticipantJoined(conversationEntry) {
  * @returns {string}
  */
 export function getParticipantChangeEventPartcipantName(conversationEntry) {
-    return isParticipantChangeEvent(conversationEntry) && (conversationEntry.content.entries[0].displayName || conversationEntry.content.entries[0].participant.role);
-};
+  return (
+    isParticipantChangeEvent(conversationEntry) &&
+    (conversationEntry.content.entries[0].displayName ||
+      conversationEntry.content.entries[0].participant.role)
+  );
+}
