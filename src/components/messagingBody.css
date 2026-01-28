@@ -1,22 +1,25 @@
 .messagingBody {
   width: 390px;
   height: 740px;
-  border-bottom: 0px solid #ddd;
-  overflow: auto;
-  padding-right: 0px;
-  padding-left: 0px;
+  overflow-y: auto;
+
+  /* ❌ ELIMINADO */
+  margin: 0;
+
+  padding: 0;
   background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
   background-size: cover;
   background-position: center;
   background-repeat: repeat;
   background-attachment: scroll;
-  border-radius: 0px;
+
+  border-radius: 0;
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  margin: auto;
+
   display: block;
-  left: 50%;
 }
+
 
 .conversationEntriesListView {
   height: auto;
