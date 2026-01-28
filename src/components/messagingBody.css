@@ -1,26 +1,26 @@
 .messagingBody {
-    width: 400px;
-    height: 674px;
-    border-bottom: 0px solid #ddd;
-    overflow: auto;
-    padding-right: 12px;
-    padding-left: 12px;
-    background: white;
-    border-radius: inherit;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    margin: auto;
-    display: block;
-    left: 50%;
+  width: 400px;
+  height: 674px;
+  border-bottom: 0px solid #ddd;
+  overflow: auto;
+  padding-right: 8px;
+  padding-left: 8px;
+  background: linear-gradient(135deg, #f5f1e8 0%, #f0f0f5 100%);
+  border-radius: inherit;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  margin: auto;
+  display: block;
+  left: 50%;
 }
 
-
 .conversationEntriesListView {
-    height: auto;
-    padding: 5px 10px;
-    margin-top: 0;
-    margin-bottom: 0;
+  height: auto;
+  padding: 0px 8px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .textMessageBubbleContainer {
-    text-align: left;
+  text-align: left;
 }
