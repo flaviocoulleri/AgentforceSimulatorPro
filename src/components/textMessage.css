@@ -46,7 +46,7 @@
 
 .textMessageContent {
   white-space: pre-line;
-  color: inherit;
+  color: black;
   margin: 0px;
   font-size: 15px;
   font-weight: 400;
