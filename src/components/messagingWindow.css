@@ -15,9 +15,9 @@
     padding-right: 2px;
     padding-left: 2px;
 
-    /* 🔥 CLAVE */
+    /* ✅ FLEX CORRECTO */
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centra en eje Y */
-    align-items: center;     /* Centra en eje X (opcional pero usual) */
+    justify-content: flex-start; /* 👈 SIN espacio vertical extra */
+    align-items: center;         /* 👈 centra horizontalmente */
 }
