@@ -23,3 +23,10 @@
     /* 👇 evita cortes raros con bordes */
     overflow: hidden;
 }
+.messagingWindow {
+  outline: 2px solid red;
+}
+
+.messagingWindow > * {
+  outline: 1px dashed blue;
+}
