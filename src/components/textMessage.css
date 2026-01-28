@@ -46,12 +46,16 @@
 
 .textMessageContent {
   white-space: pre-line;
-  color: black;
+  color: #000;
   margin: 0px;
   font-size: 15px;
   font-weight: 400;
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.textMessageBubble[class~="incoming"] .textMessageContent {
+  color: #000;
 }
 
 .textMessageContent h3 {
