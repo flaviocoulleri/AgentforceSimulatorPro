@@ -1,33 +1,48 @@
-.messagingHeader {
-    width: 460px;
-    height: 50px;
-    background: linear-gradient(180deg, #f0f0f5 0%, #ffffff 100%);
-    border-radius: 15px 15px 0px 0px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    padding-top: 80px;
-    padding-right: 20px;
-    padding-left: 20px;
-    border-bottom: 1px solid #e5e5ea;
-}
+import "./messagingHeader.css";
+import { FaChevronLeft } from "react-icons/fa6";
+import { IoCall, IoVideocam } from "react-icons/io5";
 
-.messagingHeaderCloseButton {
-    float: right;
-    margin-right: 0px;
-    padding-bottom: 80px;
-    height: 50px;
-    width: max-content;
-    background: transparent;
-    border: none;
-    pointer-events: all;
-    cursor: pointer;
-}
+import { CONVERSATION_CONSTANTS } from "../helpers/constants";
 
-.messagingHeaderCloseButtonIcon {
-    transform: scale(2);
-    fill: whitesmoke;
-}
+export default function MessagingHeader(props) {
+    /**
+     * Handle Close button click based on the current conversation status.
+     */
+    function handleCloseButtonClick(evt) {
+        if (evt) {
+            if (props.conversationStatus === CONVERSATION_CONSTANTS.ConversationStatus.OPENED_CONVERSATION) {
+                props.endConversation();
+            } else if (props.conversationStatus === CONVERSATION_CONSTANTS.ConversationStatus.CLOSED_CONVERSATION || props.conversationStatus === CONVERSATION_CONSTANTS.ConversationStatus.NOT_STARTED_CONVERSATION) {
+                props.closeMessagingWindow();
+            }
+        }
+    }
 
-.messagingHeaderCloseButtonIcon:hover{
-    opacity: 0.5;
-    transform: scale(2);
+    function generateCloseButtonTitle() {
+        return `${props.conversationStatus === CONVERSATION_CONSTANTS.ConversationStatus.OPENED_CONVERSATION ? `End conversation` : `Close window`}`;
+    }
+
+    return (
+        <div className="messagingHeader">
+            <button className="messagingHeaderBackButton" onClick={handleCloseButtonClick} title={generateCloseButtonTitle()}>
+                <FaChevronLeft className="messagingHeaderBackButtonIcon"/>
+            </button>
+            
+            <div className="messagingHeaderContactInfo">
+                <div className="messagingHeaderAvatar">
+                    <div className="avatarPlaceholder">🤖</div>
+                </div>
+                <div className="messagingHeaderText">
+                    <h2 className="messagingHeaderTitle">Agentforce Agent</h2>
+                </div>
+            </div>
+
+            <button className="messagingHeaderActionButton">
+                <IoVideocam className="messagingHeaderActionIcon"/>
+            </button>
+            <button className="messagingHeaderActionButton">
+                <IoCall className="messagingHeaderActionIcon"/>
+            </button>
+        </div>
+    )
 }
