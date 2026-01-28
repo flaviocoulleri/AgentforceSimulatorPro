@@ -1,6 +1,6 @@
 .textMessageSenderContent {
   color: #99999c;
-  margin: 4px 0 0 0;
+  margin: 2px 0 0 0;
   font-size: 12px;
   font-weight: 400;
   font-family:
@@ -24,9 +24,9 @@
   max-width: 350px;
   width: -webkit-fit-content;
   border-radius: 18px;
-  margin: 3px auto;
+  margin: 1px auto;
   padding: 8px 12px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: none;
   word-wrap: break-word;
 }
 
