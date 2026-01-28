@@ -11,13 +11,15 @@
     background-position: center;
     z-index: 1000;
 
-    padding-top: 0px;
-    padding-right: 2px;
-    padding-left: 2px;
+    /* 👇 CLAVE: sin padding vertical */
+    padding: 0 2px;
 
-    /* ✅ FLEX CORRECTO */
+    /* 👇 FLEX sin espacios */
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* 👈 SIN espacio vertical extra */
-    align-items: center;         /* 👈 centra horizontalmente */
+    justify-content: flex-start;
+    align-items: center;
+
+    /* 👇 evita cortes raros con bordes */
+    overflow: hidden;
 }
