@@ -1,48 +1,101 @@
-import "./messagingHeader.css";
-import { FaChevronLeft } from "react-icons/fa6";
-import { IoCall, IoVideocam } from "react-icons/io5";
+.messagingHeader {
+  width: 100%;
+  height: auto;
+  background: linear-gradient(180deg, #f5f1e8 0%, #f0ede8 100%);
+  border-radius: 15px 15px 0px 0px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  padding-top: 80px;
+  padding-right: 16px;
+  padding-left: 8px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e5ea;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
-import { CONVERSATION_CONSTANTS } from "../helpers/constants";
+.messagingHeaderBackButton {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+}
 
-export default function MessagingHeader(props) {
-    /**
-     * Handle Close button click based on the current conversation status.
-     */
-    function handleCloseButtonClick(evt) {
-        if (evt) {
-            if (props.conversationStatus === CONVERSATION_CONSTANTS.ConversationStatus.OPENED_CONVERSATION) {
-                props.endConversation();
-            } else if (props.conversationStatus === CONVERSATION_CONSTANTS.ConversationStatus.CLOSED_CONVERSATION || props.conversationStatus === CONVERSATION_CONSTANTS.ConversationStatus.NOT_STARTED_CONVERSATION) {
-                props.closeMessagingWindow();
-            }
-        }
-    }
+.messagingHeaderBackButtonIcon {
+  font-size: 20px;
+  color: #000;
+}
 
-    function generateCloseButtonTitle() {
-        return `${props.conversationStatus === CONVERSATION_CONSTANTS.ConversationStatus.OPENED_CONVERSATION ? `End conversation` : `Close window`}`;
-    }
+.messagingHeaderBackButton:active {
+  opacity: 0.6;
+}
 
-    return (
-        <div className="messagingHeader">
-            <button className="messagingHeaderBackButton" onClick={handleCloseButtonClick} title={generateCloseButtonTitle()}>
-                <FaChevronLeft className="messagingHeaderBackButtonIcon"/>
-            </button>
-            
-            <div className="messagingHeaderContactInfo">
-                <div className="messagingHeaderAvatar">
-                    <div className="avatarPlaceholder">🤖</div>
-                </div>
-                <div className="messagingHeaderText">
-                    <h2 className="messagingHeaderTitle">Agentforce Agent</h2>
-                </div>
-            </div>
+.messagingHeaderContactInfo {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
-            <button className="messagingHeaderActionButton">
-                <IoVideocam className="messagingHeaderActionIcon"/>
-            </button>
-            <button className="messagingHeaderActionButton">
-                <IoCall className="messagingHeaderActionIcon"/>
-            </button>
-        </div>
-    )
+.messagingHeaderAvatar {
+  flex-shrink: 0;
+}
+
+.avatarPlaceholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.messagingHeaderText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.messagingHeaderTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+}
+
+.messagingHeaderSubtitle {
+  margin: 0;
+  font-size: 12px;
+  color: #65676b;
+}
+
+.messagingHeaderActionButton {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+  color: #000;
+}
+
+.messagingHeaderActionIcon {
+  font-size: 20px;
+}
+
+.messagingHeaderActionButton:active {
+  opacity: 0.6;
 }
