@@ -33,6 +33,7 @@
 .textMessageBubble[class~="incoming"] {
   float: left;
   background-color: #ffffff;
+  color: black;
   border-bottom-left-radius: 4px;
 }
 
