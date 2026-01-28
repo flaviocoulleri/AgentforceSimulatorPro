@@ -1,46 +1,57 @@
 .textMessageSenderContent {
-    color: rgb(153, 153, 153);
-    margin: 0px;
-    font-size: 10px;
-    font-weight: 400;
+  color: rgb(153, 153, 153);
+  margin: 0px;
+  font-size: 10px;
+  font-weight: 400;
 }
 
 .textMessageSenderContent[class~="incoming"] {
-    text-align: left;
+  text-align: left;
 }
 
 .textMessageSenderContent[class~="outgoing"] {
-    text-align: right;
+  text-align: right;
 }
 
 .textMessageBubbleContainer {
-    overflow: auto;
+  overflow: auto;
 }
 
 .textMessageBubble {
-    min-width: 50px;
-    max-width: 350px;
-    width: -webkit-fit-content;
-    /* background-color: rgb(158 154 154); */
-    border-radius: 20px;
-    margin: 1px auto;
-    padding: 8px 14px;
+  min-width: 50px;
+  max-width: 350px;
+  width: -webkit-fit-content;
+  /* background-color: rgb(158 154 154); */
+  border-radius: 20px;
+  margin: 1px auto;
+  padding: 8px 14px;
 }
 
 .textMessageBubble[class~="incoming"] {
-    float: left;
-    background-color: white;
+  float: left;
+  background-color: white;
 }
 
 .textMessageBubble[class~="outgoing"] {
-    float: right;
-    background-color: #d9fdd3;
+  float: right;
+  background-color: #d9fdd3;
 }
 
 .textMessageContent {
-    white-space: pre-line;
-    color: #111b21;
-    margin: 0px;
-    font-size: 16px;
-    font-weight: 300;
+  white-space: pre-line;
+  color: #111b21;
+  margin: 0px;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.textMessageContent h3 {
+  margin: 8px 0 4px 0;
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #111b21;
+}
+
+.textMessageContent strong {
+  font-weight: 600;
 }
