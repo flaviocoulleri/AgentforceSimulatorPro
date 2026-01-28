@@ -1,8 +1,10 @@
 .textMessageSenderContent {
-  color: rgb(153, 153, 153);
-  margin: 0px;
-  font-size: 10px;
+  color: #99999c;
+  margin: 4px 0 0 0;
+  font-size: 12px;
   font-weight: 400;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .textMessageSenderContent[class~="incoming"] {
@@ -21,28 +23,34 @@
   min-width: 50px;
   max-width: 350px;
   width: -webkit-fit-content;
-  /* background-color: rgb(158 154 154); */
-  border-radius: 20px;
-  margin: 1px auto;
-  padding: 8px 14px;
+  border-radius: 18px;
+  margin: 3px auto;
+  padding: 8px 12px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+  word-wrap: break-word;
 }
 
 .textMessageBubble[class~="incoming"] {
   float: left;
-  background-color: white;
+  background-color: #e5e5ea;
+  border-bottom-left-radius: 4px;
 }
 
 .textMessageBubble[class~="outgoing"] {
   float: right;
-  background-color: #d9fdd3;
+  background-color: #25d366;
+  color: white;
+  border-bottom-right-radius: 4px;
 }
 
 .textMessageContent {
   white-space: pre-line;
-  color: #111b21;
+  color: inherit;
   margin: 0px;
-  font-size: 16px;
-  font-weight: 300;
+  font-size: 15px;
+  font-weight: 400;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .textMessageContent h3 {
