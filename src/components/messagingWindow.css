@@ -1,28 +1,22 @@
 .messagingWindow {
     width: 460px;
     height: 920px;
-    bottom: 50px;
-    right: 10px;
     border-radius: 20px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    background-color: transparent;
     background-image: url('./IphoneFrame.png');
     background-size: cover;
     background-position: center;
-    z-index: 1000;
 
-    /* 👇 CLAVE: sin padding vertical */
-    padding: 0 2px;
-
-    /* 👇 FLEX sin espacios */
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: flex-start; /* vertical pegado */
+    align-items: center;         /* 👈 centra en X */
 
-    /* 👇 evita cortes raros con bordes */
+    padding: 0 2px;
     overflow: hidden;
 }
+
+
+
 .messagingWindow {
   outline: 2px solid red;
 }
