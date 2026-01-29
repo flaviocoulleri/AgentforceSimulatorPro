@@ -241,20 +241,22 @@ export default function BootstrapMessaging() {
                     onChange={e => setMessagingURL(e.target.value.trim())}
                     disabled={shouldShowMessagingButton}>
                 </input>
-                <button
-                    className="deploymentDetailsFormSubmitButton"
-                    onClick={handleDeploymentDetailsFormSubmit}
-                    disabled={shouldDisableFormSubmitButton()}
-                >
-                    Submit
-                </button>
+                <div className="buttonsContainer">
+                    <button
+                        className="deploymentDetailsFormSubmitButton"
+                        onClick={handleDeploymentDetailsFormSubmit}
+                        disabled={shouldDisableFormSubmitButton()}
+                    >
+                        Submit
+                    </button>
+                    {shouldShowMessagingButton &&
+                        <MessagingButton
+                            clickHandler={handleMessagingButtonClick}
+                            disableButton={shouldDisableMessagingButton}
+                            //showAnimation={showAnimationSpinner}/>}
+                            showSpinner={showMessagingButtonSpinner} />}
+                </div>
             </div>
-            {shouldShowMessagingButton &&
-                <MessagingButton
-                    clickHandler={handleMessagingButtonClick}
-                    disableButton={shouldDisableMessagingButton}
-                    //showAnimation={showAnimationSpinner}/>}
-                    showSpinner={showMessagingButtonSpinner} />}
                     
             {shouldShowMessagingWindow &&
                 <Draggable intitialPosition={{ x: 1000, y: 500 }}>
