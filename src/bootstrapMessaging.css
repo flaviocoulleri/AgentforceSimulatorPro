@@ -18,12 +18,11 @@ input {
     border-radius: 5px;
     outline: 0;
     border: 0; 
-    margin: 10px 0px;
+    margin: 0;
     cursor: pointer;
     box-shadow: 0px 2px 2px lightgray;
     transition: ease background-color 250ms;
     font-weight: bold;
-    align-self: center;
 }
 
 .deploymentDetailsFormSubmitButton:hover:not(:disabled) {
@@ -33,4 +32,13 @@ input {
 .deploymentDetailsFormSubmitButton:disabled {
     cursor: not-allowed;
     opacity: 0.7;
+}
+
+.buttonsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0px;
 }
