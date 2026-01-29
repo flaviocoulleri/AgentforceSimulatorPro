@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   min-height: 100vh;
-  background-image: url('./ImageBackground3.png');
+  background-image: url('./ImageBackground3.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -31,7 +31,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  background-image: url('./ImageBackground3.png');/* Asegúrate de usar la ruta correcta */
+  background-image: url('./ImageBackground3.jpg');/* Asegúrate de usar la ruta correcta */
   background-size: cover; /* Cubre el área del header completamente */
   background-position: center; /* Centra la imagen en el header */
   background-attachment: fixed; /* Fija el fondo al hacer scroll */
