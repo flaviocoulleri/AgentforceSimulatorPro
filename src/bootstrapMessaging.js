@@ -219,7 +219,7 @@ export default function BootstrapMessaging() {
         <>
             <h1>Agentforce WhatsApp Simulator</h1>
             <div className="deploymentDetailsForm">
-                //<h4>Input your Embedded Service (Custom Client) deployment details below</h4>
+                <!--<h4>Input your Embedded Service (Custom Client) deployment details below</h4>-->
                 <label>Organization ID</label>
                 <input
                     type="text"
