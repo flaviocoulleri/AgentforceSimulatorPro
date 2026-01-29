@@ -70,7 +70,7 @@ export default function TextMessage({conversationEntry}) {
     function generateMessageSenderContentText() {
         const formattedTime = util.getFormattedTime(conversationEntry.transcriptedTimestamp);
 
-        return formattedTime;
+        return `${conversationEntry.isEndUserMessage ? `You` : conversationEntry.actorName} at ${formattedTime}`;
     }
 
     /**
@@ -106,12 +106,12 @@ export default function TextMessage({conversationEntry}) {
 									),
 							}}
 						/>
-						<p className={generateMessageSenderContentClassName()}>
-							{generateMessageAcknowledgementContentText()}
-							{generateMessageSenderContentText()}
-						</p>
 					</div>
 				</div>
+				<p className={generateMessageSenderContentClassName()}>
+					{generateMessageAcknowledgementContentText()}
+					{generateMessageSenderContentText()}
+				</p>
 			</>
 		);
 }
