@@ -70,7 +70,7 @@ export default function TextMessage({conversationEntry}) {
     function generateMessageSenderContentText() {
         const formattedTime = util.getFormattedTime(conversationEntry.transcriptedTimestamp);
 
-        return `${conversationEntry.isEndUserMessage ? `You` : conversationEntry.actorName} at ${formattedTime}`;
+        return formattedTime;
     }
 
     /**
@@ -94,24 +94,24 @@ export default function TextMessage({conversationEntry}) {
     }
 
     return (
-    <>
-        <div className={generateMessageBubbleContainerClassName()}>
-            <div className={generateMessageBubbleClassName()}>
-                <div
-                    className={generateMessageContentClassName()}
-                    dangerouslySetInnerHTML={{
-                        __html:
-                            ConversationEntryUtil.getTextMessageContent(
-                                conversationEntry
-                            ),
-                    }}
-                />
-                <p className={generateMessageSenderContentClassName()}>
-                    {generateMessageAcknowledgementContentText()}
-                    {generateMessageSenderContentText()}
-                </p>
-            </div>
-        </div>
-    </>
-);
+			<>
+				<div className={generateMessageBubbleContainerClassName()}>
+					<div className={generateMessageBubbleClassName()}>
+						<div
+							className={generateMessageContentClassName()}
+							dangerouslySetInnerHTML={{
+								__html:
+									ConversationEntryUtil.getTextMessageContent(
+										conversationEntry
+									),
+							}}
+						/>
+						<p className={generateMessageSenderContentClassName()}>
+							{generateMessageAcknowledgementContentText()}
+							{generateMessageSenderContentText()}
+						</p>
+					</div>
+				</div>
+			</>
+		);
 }
