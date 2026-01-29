@@ -7,7 +7,7 @@ html, body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url('./backgroundPro.jpg');
+  background-image: url('./ImageBackground.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
