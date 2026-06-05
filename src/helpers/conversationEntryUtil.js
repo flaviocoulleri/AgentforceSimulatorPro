@@ -196,6 +196,16 @@ export function processMarkdownFormatting(text) {
   html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
   html = html.replace(/\*(.+?)\*/g, "<strong>$1</strong>");
 
+  // Process markdown links: [text](url) -> <a href="url">text</a>
+  html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (match, linkText, url) => {
+    return `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color: #0066cc; text-decoration: underline; word-break: break-all;">${linkText}</a>`;
+  });
+
+  // Process bare URLs not already inside an <a> tag
+  html = html.replace(/(?<!href="|">)(https?:\/\/[^\s<"]+)/g, (match, url) => {
+    return `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color: #0066cc; text-decoration: underline; word-break: break-all;">${url}</a>`;
+  });
+
   return html;
 }
 
