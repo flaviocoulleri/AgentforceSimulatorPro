@@ -93,25 +93,30 @@ export default function TextMessage({conversationEntry}) {
         }
     }
 
-    return (
-			<>
-				<div className={generateMessageBubbleContainerClassName()}>
-					<div className={generateMessageBubbleClassName()}>
-						<div
-							className={generateMessageContentClassName()}
-							dangerouslySetInnerHTML={{
-								__html:
-									ConversationEntryUtil.getTextMessageContent(
-										conversationEntry
-									),
-							}}
-						/>
-					</div>
-				</div>
-				<p className={generateMessageSenderContentClassName()}>
-					{generateMessageAcknowledgementContentText()}
-					{generateMessageSenderContentText()}
-				</p>
-			</>
-		);
+        return (
+        <>
+            <div className={generateMessageBubbleContainerClassName()}>
+                <div className={generateMessageBubbleClassName()}>
+                    <div
+                        className={generateMessageContentClassName()}
+                        dangerouslySetInnerHTML={{
+                            __html:
+                                ConversationEntryUtil.getTextMessageContent(
+                                    conversationEntry
+                                ),
+                        }}
+                    />
+                    <div className={`textMessageMeta ${conversationEntry.isEndUserMessage ? 'outgoing' : 'incoming'}`}>
+                        {!conversationEntry.isEndUserMessage && (
+                            <span className="textMessageMetaName">{conversationEntry.actorName}</span>
+                        )}
+                        {conversationEntry.isEndUserMessage && generateMessageAcknowledgementContentText() && (
+                            <span className="textMessageMetaAck">{generateMessageAcknowledgementContentText()}</span>
+                        )}
+                        <span className="textMessageMetaTime">{util.getFormattedTime(conversationEntry.transcriptedTimestamp)}</span>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
 }
