@@ -186,13 +186,11 @@ export function processMarkdownFormatting(text) {
   let html = text;
 
   // Process headings: # Title -> <h3>Title</h3>
-  // This handles lines that start with # (one or more)
   html = html.replace(/^#+\s+(.+)$/gm, (match, title) => {
     return `<h3 style="margin: 8px 0 4px 0; font-size: 1.1em; font-weight: 600; color: #000;">${title}</h3>`;
   });
 
   // Process bold text: **text** -> <strong>text</strong>
-  // Also handles single asterisks around text *text*
   html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
   html = html.replace(/\*(.+?)\*/g, "<strong>$1</strong>");
 
@@ -205,6 +203,30 @@ export function processMarkdownFormatting(text) {
   html = html.replace(/(?<!href="|">)(https?:\/\/[^\s<"]+)/g, (match, url) => {
     return `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color: #0066cc; text-decoration: underline; word-break: break-all;">${url}</a>`;
   });
+
+  // Process bullet lists: consecutive lines starting with "- "
+  const lines = html.split('\n');
+  const processedLines = [];
+  let listItems = [];
+
+  for (const line of lines) {
+    const bulletMatch = line.match(/^-\s+(.+)$/);
+    if (bulletMatch) {
+      listItems.push(`<li>${bulletMatch[1]}</li>`);
+    } else {
+      if (listItems.length > 0) {
+        processedLines.push(`<ul>${listItems.join('')}</ul>`);
+        listItems = [];
+      }
+      processedLines.push(line);
+    }
+  }
+
+  if (listItems.length > 0) {
+    processedLines.push(`<ul>${listItems.join('')}</ul>`);
+  }
+
+  html = processedLines.join('\n');
 
   return html;
 }
