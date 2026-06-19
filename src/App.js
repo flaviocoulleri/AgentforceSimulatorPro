@@ -2,7 +2,7 @@ import AppLogo from './AppLogo.png'
 import './App.css';
 import BootstrapMessaging from './bootstrapMessaging';
 
-const APP_VERSION = "1.1.4";
+const APP_VERSION = "1.1.5";
 
 function App() {
   return (
