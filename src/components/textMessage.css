@@ -69,3 +69,13 @@
   font-weight: 600;
   color: #000 !important;
 }
+
+.textMessageContent ul {
+  margin: 4px 0;
+  padding-left: 18px;
+  list-style-type: disc;
+}
+
+.textMessageContent li {
+  margin: 2px 0;
+}
