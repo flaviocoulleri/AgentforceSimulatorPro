@@ -213,7 +213,7 @@ export function processMarkdownFormatting(text) {
   let listItems = [];
 
   for (const line of lines) {
-    const bulletMatch = line.match(/^-\s+(.+)$/);
+    const bulletMatch = line.match(/^\s*[-–—•]\s+(.+)$/);
     if (bulletMatch) {
       listItems.push(`<li>${bulletMatch[1]}</li>`);
     } else {
