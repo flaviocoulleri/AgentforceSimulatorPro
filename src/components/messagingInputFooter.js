@@ -112,7 +112,7 @@ export default function MessagingInputFooter(props) {
         // Required parameters.
         const conversationId = getConversationId();
         const messageId = util.generateUUID();
-        const value = textareaContent;
+        cconst value = textareaContent.trim();
         // Optional parameters.
         let inReplyToMessageId;
         let isNewMessagingSession;
