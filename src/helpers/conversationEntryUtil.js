@@ -230,6 +230,8 @@ export function processMarkdownFormatting(text) {
   }
 
   html = processedLines.join('\n');
+  // Collapse multiple consecutive blank lines into one
+  html = html.replace(/\n{2,}/g, '\n');
 
   return html;
 }
