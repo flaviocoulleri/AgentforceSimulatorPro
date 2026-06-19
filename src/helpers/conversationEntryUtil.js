@@ -185,6 +185,9 @@ export function processMarkdownFormatting(text) {
 
   let html = text;
 
+  // Process horizontal rules: --- -> <hr>
+  html = html.replace(/^---+$/gm, '<hr style="border: none; border-top: 1px solid #e0e0e0; margin: 8px 0;">');
+
   // Process headings: # Title -> <h3>Title</h3>
   html = html.replace(/^#+\s+(.+)$/gm, (match, title) => {
     return `<h3 style="margin: 8px 0 4px 0; font-size: 1.1em; font-weight: 600; color: #000;">${title}</h3>`;
