@@ -1,0 +1,99 @@
+.messagingHeader {
+    width: 390px;
+    background: linear-gradient(180deg, #f5f1e8 0%, #f0ede8 100%);
+    border-radius: 35px 35px 0 0;
+    padding: 12px 0;
+    border-bottom: 1px solid #e5e5ea;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin: 0;
+}
+
+
+.messagingHeaderBackButton {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+}
+
+.messagingHeaderBackButtonIcon {
+  font-size: 20px;
+  color: #000;
+}
+
+.messagingHeaderBackButton:active {
+  opacity: 0.6;
+}
+
+.messagingHeaderContactInfo {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.messagingHeaderAvatar {
+  flex-shrink: 0;
+}
+
+.avatarPlaceholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.messagingHeaderText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.messagingHeaderTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+}
+
+.messagingHeaderSubtitle {
+  margin: 0;
+  font-size: 12px;
+  color: #65676b;
+}
+
+.messagingHeaderActionButton {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+  color: #000;
+}
+
+.messagingHeaderActionIcon {
+  font-size: 20px;
+}
+
+.messagingHeaderActionButton:active {
+  opacity: 0.6;
+}

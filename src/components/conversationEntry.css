@@ -1,0 +1,6 @@
+.conversationEntryContainer {
+    position: relative;
+    overflow: auto;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
