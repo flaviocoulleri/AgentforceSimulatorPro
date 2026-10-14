@@ -10,7 +10,7 @@ import MessagingButton from "./components/messagingButton";
 import './bootstrapMessaging.css';
 
 
-import { storeOrganizationId, storeDeploymentDeveloperName, storeChannelAddressIdentifier, storeSalesforceMessagingUrl } from './services/dataProvider';
+import { storeOrganizationId, storeDeploymentDeveloperName, storeSalesforceMessagingUrl } from './services/dataProvider';
 import { determineStorageType, initializeWebStorage, getItemInWebStorageByKey, getItemInPayloadByKey } from './helpers/webstorageUtils';
 import { APP_CONSTANTS, STORAGE_KEYS } from './helpers/constants';
 
@@ -20,7 +20,6 @@ export default function BootstrapMessaging() {
     let [shouldShowMessagingButton, setShowMessagingButton] = useState(false);
     let [orgId, setOrgId] = useState('00Daj00000wPtsj');
     let [deploymentDevName, setDeploymentDevName] = useState('');
-    let [channelAddressIdentifier, setChannelAddressIdentifier] = useState('');
     let [messagingURL, setMessagingURL] = useState('https://pr1782405263810.my.salesforce-scrt.com');
     let [shouldDisableMessagingButton, setShouldDisableMessagingButton] = useState(false);
     let [shouldShowMessagingWindow, setShouldShowMessagingWindow] = useState(false);
@@ -42,7 +41,6 @@ export default function BootstrapMessaging() {
             const orgId = getItemInPayloadByKey(webStoragePayload, STORAGE_KEYS.ORGANIZATION_ID);
             const deploymentDevName = getItemInPayloadByKey(webStoragePayload, STORAGE_KEYS.DEPLOYMENT_DEVELOPER_NAME);
             const messagingUrl = getItemInPayloadByKey(webStoragePayload, STORAGE_KEYS.MESSAGING_URL);
-            const channelAddressIdentifier = getItemInPayloadByKey(webStoragePayload, STORAGE_KEYS.CHANNEL_ADDRESS_IDENTIFIER);
 
             if (!isValidOrganizationId(orgId)) {
                 console.warn(`Invalid organization id exists in the web storage: ${orgId}. Cleaning up the invalid object from the web storage.`);
@@ -56,10 +54,9 @@ export default function BootstrapMessaging() {
             setOrgId(orgId);
             setDeploymentDevName(deploymentDevName);
             setMessagingURL(messagingUrl);
-            setChannelAddressIdentifier(channelAddressIdentifier || '');
 
             // Initialize messaging client.
-            initializeMessagingClient(orgId, deploymentDevName, messagingUrl, channelAddressIdentifier);
+            initializeMessagingClient(orgId, deploymentDevName, messagingUrl);
 
             const messagingJwt = getItemInWebStorageByKey(STORAGE_KEYS.JWT);
             if (messagingJwt) {
@@ -87,12 +84,11 @@ export default function BootstrapMessaging() {
      * 1. internally initializing the Embedded Service deployment paramaters in-memory.
      * 2. initializing Salesforce Organization Id in the browser web storage.
      */
-    function initializeMessagingClient(ord_id, deployment_dev_name, messaging_url, channel_address_identifier) {
+    function initializeMessagingClient(ord_id, deployment_dev_name, messaging_url) {
         // Initialize helpers.
         initializeWebStorage(ord_id || orgId);
         storeOrganizationId(ord_id || orgId);
         storeDeploymentDeveloperName(deployment_dev_name || deploymentDevName);
-        storeChannelAddressIdentifier(channel_address_identifier || channelAddressIdentifier);
         storeSalesforceMessagingUrl(messaging_url || messagingURL);
     }
 
@@ -236,13 +232,6 @@ export default function BootstrapMessaging() {
                     type="text"
                     value={deploymentDevName || ""}
                     onChange={e => setDeploymentDevName(e.target.value.trim())}
-                    disabled={shouldShowMessagingButton}>
-                </input>
-                <label>Channel Address Identifier</label>
-                <input
-                    type="text"
-                    value={channelAddressIdentifier || ""}
-                    onChange={e => setChannelAddressIdentifier(e.target.value.trim())}
                     disabled={shouldShowMessagingButton}>
                 </input>
                 <label>URL</label>

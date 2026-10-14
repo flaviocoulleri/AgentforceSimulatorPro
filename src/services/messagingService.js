@@ -1,5 +1,5 @@
 import { APP_CONSTANTS, STORAGE_KEYS, MESSAGING_API_CONSTANTS, CONVERSATION_CONSTANTS, SUPPORTED_ENTRY_TYPES } from "../helpers/constants";
-import { getOrganizationId, getDeploymentDeveloperName, getChannelAddressIdentifier, getSalesforceMessagingUrl } from "./dataProvider";
+import { getOrganizationId, getDeploymentDeveloperName, getSalesforceMessagingUrl } from "./dataProvider";
 import { getItemInWebStorageByKey, clearWebStorage } from "../helpers/webstorageUtils";
 import { util } from "../helpers/common";
 
@@ -60,7 +60,6 @@ function sendFetchRequest(apiPath, method, mode, requestHeaders, requestBody) {
 function getUnauthenticatedAccessToken() {
 	const orgId = getOrganizationId();
 	const esDeveloperName = getDeploymentDeveloperName();
-	const channelAddressIdentifier = getChannelAddressIdentifier();
 	const messagingUrl = getSalesforceMessagingUrl();
 	const capabilitiesVersion = APP_CONSTANTS.APP_CAPABILITIES_VERSION;
 	const platform = APP_CONSTANTS.APP_PLATFORM;
@@ -76,7 +75,6 @@ function getUnauthenticatedAccessToken() {
 		{
 			orgId,
 			esDeveloperName,
-			...(channelAddressIdentifier && { channelAddressIdentifier }),
 			capabilitiesVersion,
 			platform
 		}
@@ -98,7 +96,6 @@ function getUnauthenticatedAccessToken() {
  */
 function createConversation(conversationId, routingAttributes) {
 	const esDeveloperName = getDeploymentDeveloperName();
-	const channelAddressIdentifier = getChannelAddressIdentifier();
 	const messagingUrl = getSalesforceMessagingUrl();
 	const apiPath = `${messagingUrl}/iamessage/api/v2/conversation`;
 
@@ -110,7 +107,6 @@ function createConversation(conversationId, routingAttributes) {
 		{
 			...(routingAttributes && { routingAttributes }),
 			esDeveloperName,
-			...(channelAddressIdentifier && { channelAddressIdentifier }),
 			conversationId
 		},
 		"createNewConversation"
@@ -249,7 +245,6 @@ function listConversationEntries(conversationId, startTimestamp, endTimestamp, d
 function sendTextMessage(conversationId, text, messageId, inReplyToMessageId, isNewMessagingSession, routingAttributes, language) {
 	const messagingUrl = getSalesforceMessagingUrl();
 	const esDeveloperName = getDeploymentDeveloperName();
-	const channelAddressIdentifier = getChannelAddressIdentifier();
 	const apiPath = `${messagingUrl}/iamessage/api/v2/conversation/${conversationId}/message`;
 
 	return sendFetchRequest(
@@ -270,7 +265,6 @@ function sendTextMessage(conversationId, text, messageId, inReplyToMessageId, is
 			...(routingAttributes && { routingAttributes }),
 			...(isNewMessagingSession && { isNewMessagingSession }),
 			esDeveloperName,
-			...(channelAddressIdentifier && { channelAddressIdentifier }),
 			...(language && { language })
         }
 	).then(response => {
@@ -319,9 +313,7 @@ function sendTypingIndicator(conversationId, typingIndicator) {
 function closeConversation(conversationId) {
     const messagingUrl = getSalesforceMessagingUrl();
 	const esDeveloperName = getDeploymentDeveloperName();
-	const channelAddressIdentifier = getChannelAddressIdentifier();
-	const channelAddressParam = channelAddressIdentifier ? `&channelAddressIdentifier=${encodeURIComponent(channelAddressIdentifier)}` : ``;
-	const apiPath = `${messagingUrl}/iamessage/api/v2/conversation/${conversationId}?esDeveloperName=${esDeveloperName}${channelAddressParam}`;
+	const apiPath = `${messagingUrl}/iamessage/api/v2/conversation/${conversationId}?esDeveloperName=${esDeveloperName}`;
 
     return sendFetchRequest(
         apiPath,

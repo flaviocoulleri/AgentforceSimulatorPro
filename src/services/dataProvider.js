@@ -17,14 +17,6 @@ function getDeploymentDeveloperName() {
     return getItemInWebStorageByKey(STORAGE_KEYS.DEPLOYMENT_DEVELOPER_NAME);
 }
 
-// Store the Channel Address Identifier of the Embedded Service Deployment for other components to use.
-function storeChannelAddressIdentifier(channelAddressIdentifier) {
-    setItemInWebStorage(STORAGE_KEYS.CHANNEL_ADDRESS_IDENTIFIER, channelAddressIdentifier);
-}
-function getChannelAddressIdentifier() {
-    return getItemInWebStorageByKey(STORAGE_KEYS.CHANNEL_ADDRESS_IDENTIFIER);
-}
-
 // Store the Salesforce Url from the Embedded Service Deployment for other components to use.
 function storeSalesforceMessagingUrl(messagingUrl) {
     setItemInWebStorage(STORAGE_KEYS.MESSAGING_URL, messagingUrl);
@@ -84,8 +76,6 @@ export {
     getOrganizationId,
     storeDeploymentDeveloperName,
     getDeploymentDeveloperName,
-    storeChannelAddressIdentifier,
-    getChannelAddressIdentifier,
     storeSalesforceMessagingUrl,
     getSalesforceMessagingUrl,
     setDeploymentConfiguration,
